@@ -1,0 +1,12 @@
+gunicorn
+Pyrebase4
+langchain
+tiktoken
+flask
+flask_cors
+pinecone_client
+openai
+python-dotenv
+pydantic==1.10.11
+langdetect 
+googletrans==4.0.0-rc1
