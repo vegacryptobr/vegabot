@@ -14,13 +14,12 @@ export default function Home() {
           <HoverCard>
             <HoverCardTrigger className="cursor-pointer">Quer aprender mais sobre o Real Digital?</HoverCardTrigger>
             <HoverCardContent>
-              <a href="https://discord.com/invite/D6nMD2CSs6" className="text-[#dc2c2a]">Clique aqui</a> para aprender mais sobre o Real Digital na comunidade da Vega Crypto
+              Vem trocar uma ideia sobre o que você está achando do Drex <a href="https://discord.com/invite/D6nMD2CSs6" className="text-[#dc2c2a]">na nossa comunidade do Discord!</a> 
             </HoverCardContent>
           </HoverCard>
         </div>
 
       </div>
-        
     </AuthProvider>
 
   )
