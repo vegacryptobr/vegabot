@@ -290,32 +290,32 @@ export default function Chat() {
                     <CardContent className='flex flex-col items-center'>
                         <ScrollArea className="h-[75vh] min-w-full px-[2vw] max-lg:h-[93vh]" >
                             <div className={tipsView}>
-                                <CardTips text='O que é a XRP Ledger?' onClick={() => {
-                                    setInput('O que é a XRP Ledger?')
+                                <CardTips text='O que é o Real Digital?' onClick={() => {
+                                    setInput('O que é o Real Digital?')
                                     setTipsView('flex hidden')
                                 }} />
 
-                                <CardTips text='Qual o objetivo da XRP Ledger?' onClick={() => {
+                                <CardTips text='O Real Digital é uma criptomoeda?' onClick={() => {
                                     setInput('O Real Digital é uma criptomoeda?')
                                     setTipsView('flex hidden')
                                 }} />
 
-                                <CardTips text='Por que eu devo usar a XRP Ledger?' onClick={() => {
+                                <CardTips text='O que é a Vega Crypto?' onClick={() => {
                                     setInput('O que é a Vega Crypto?')
                                     setTipsView('flex hidden')
                                 }} />
 
-                                <CardTips text='Como funciona a XRP Ledger?' onClick={() => {
+                                <CardTips text='Qual a diferença do Real Digital para o pix?' onClick={() => {
                                     setInput('Qual a diferença do Real Digital para o pix?')
                                     setTipsView('flex hidden')
                                 }} />
                                 
-                                <CardTips text='Como posso começar a usar a XRP Ledger?' onClick={() => {
+                                <CardTips text='Quais os principais benefícios do Real Digital?' onClick={() => {
                                     setInput('Quais os principais benefícios do Real Digital?')
                                     setTipsView('flex hidden')
                                 }} />
 
-                                <CardTips text='Como posso me juntar à comunidade da XRP Ledger?' onClick={() => {
+                                <CardTips text='Quais os riscos do Real Digital?' onClick={() => {
                                     setInput('Quais os riscos do Real Digital?')
                                     setTipsView('flex hidden')
                                 }} />
