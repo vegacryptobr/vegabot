@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Veguinha',
-  description: 'O chatbot que tira suas dúvidas sobre o Real Digital!',
+  title: 'VegaBot',
+  description: 'Conheça o Vegabot, o seu assistente virtual que vai te ajudar a entender o Real Digital(Drex)! Deixe o Vegabot guiá-lo por uma jornada informativa e empolgante sobre esta inovação do Banco Central do Brasil. Descubra o que é, como funciona e o impacto no cenário financeiro. Deixe-nos ser a sua fonte confiável de informações. Venha explorar o mundo do Drex com o Vegabot hoje mesmo!',
 }
 
 export default function RootLayout({
