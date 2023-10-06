@@ -1,5 +1,6 @@
 'use client'
 
+import '../src/ui/md_style.css'
 import React from 'react'
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from "../src/ui/avatar"
@@ -123,7 +124,7 @@ export default function Chat() {
     const [messages, setMessages] = useState<any[]>([])
     const messageEndRef = useRef<HTMLDivElement>(null)
     const [userId, setUserId] = useState(0)
-    const [tipsView, setTipsView] = useState('flex flex-wrap justify-center gap-[5vh] mt-[18vh] max-lg:flex-nowrap max-lg:flex-col max-lg:mt-10')
+    const [tipsView, setTipsView] = useState('')
     const { successfulLogin, logMessage } = useAuth();
     const [loginMessage, setLoginMessage] = useState('')
     const [showLoginMessage, setShowLoginMessage] = useState(false);
@@ -288,37 +289,42 @@ export default function Chat() {
                 </div>
                 <Card className="flex flex-col lg:w-[50vw] border-r-[1.3vh] border-b-[1.3vh] bg-[transparent] border-t-[1.3vh] border-[#1a1a1a] rounded-r-[2vh] rounded-l-none max-lg:rounded-none max-lg:border-0 relative ">
                     <CardContent className='flex flex-col items-center'>
-                        <ScrollArea className="h-[75vh] min-w-full px-[2vw] max-lg:h-[93vh]" >
+                        <ScrollArea className="h-[75vh] w-full px-[2vw] max-lg:h-[93vh] max-lg:w-screen max-lg:px-[10vw]" >
                             <div className={tipsView}>
-                                <CardTips text='O que é o Real Digital?' onClick={() => {
-                                    setInput('O que é o Real Digital?')
-                                    setTipsView('flex hidden')
-                                }} />
+                                <h1 className='text-neutral-800 text-[3rem] font-extrabold text-center mt-[7%]'>VegaBot</h1>
 
-                                <CardTips text='O Real Digital é uma criptomoeda?' onClick={() => {
-                                    setInput('O Real Digital é uma criptomoeda?')
-                                    setTipsView('flex hidden')
-                                }} />
+                                <div className='flex flex-wrap justify-center gap-[5vh] mt-[5vh] max-lg:flex-nowrap max-lg:flex-col max-lg:mt-10'>
+                                    <CardTips text='O que é o Real Digital?' onClick={() => {
+                                        setInput('O que é o Real Digital?')
+                                        setTipsView('flex hidden')
+                                    }} />
+                                    
+                                    <CardTips text='O Real Digital é uma criptomoeda?' onClick={() => {
+                                        setInput('O Real Digital é uma criptomoeda?')
+                                        setTipsView('flex hidden')
+                                    }} />
 
-                                <CardTips text='O que é a Vega Crypto?' onClick={() => {
-                                    setInput('O que é a Vega Crypto?')
-                                    setTipsView('flex hidden')
-                                }} />
+                                    <CardTips text='O que é a Vega Crypto?' onClick={() => {
+                                        setInput('O que é a Vega Crypto?')
+                                        setTipsView('flex hidden')
+                                    }} />
 
-                                <CardTips text='Qual a diferença do Real Digital para o pix?' onClick={() => {
-                                    setInput('Qual a diferença do Real Digital para o pix?')
-                                    setTipsView('flex hidden')
-                                }} />
-                                
-                                <CardTips text='Quais os principais benefícios do Real Digital?' onClick={() => {
-                                    setInput('Quais os principais benefícios do Real Digital?')
-                                    setTipsView('flex hidden')
-                                }} />
+                                    <CardTips text='Qual a diferença do Real Digital para o pix?' onClick={() => {
+                                        setInput('Qual a diferença do Real Digital para o pix?')
+                                        setTipsView('flex hidden')
+                                    }} />
+                                    
+                                    <CardTips text='Quais os principais benefícios do Real Digital?' onClick={() => {
+                                        setInput('Quais os principais benefícios do Real Digital?')
+                                        setTipsView('flex hidden')
+                                    }} />
+                                    
+                                    <CardTips text='Quais os riscos do Real Digital?' className='max-lg:hidden' onClick={() => {
+                                        setInput('Quais os riscos do Real Digital?')
+                                        setTipsView('flex hidden')
+                                    }} />
 
-                                <CardTips text='Quais os riscos do Real Digital?' onClick={() => {
-                                    setInput('Quais os riscos do Real Digital?')
-                                    setTipsView('flex hidden')
-                                }} />
+                                </div>
 
                             </div>
 
@@ -339,9 +345,9 @@ export default function Chat() {
 
                                     {message.messageId === messages.length && (
                                         isLoading && (
-                                            <div className='flex items-start gap-[2vh] mt-[2vh] mb-5'>
-                                                <Skeleton className="h-[4.2vh] w-[4.2vh] rounded-full max-lg:hidden" />
-                                                <Skeleton className="min-h-[5vh] px-[2vh] py-[1.4vh] text-[1.5vh] max-lg:text-sm text-zinc-800 rounded-[3vh]">
+                                            <div className='flex items-start gap-[2vh] mt-[2vh] mb-5 '>
+                                                <Skeleton className="h-[4.2vh] w-[4.2vh] rounded-full max-lg:hidden bg-neutral-200" />
+                                                <Skeleton className="min-h-[5vh] px-[2vh] py-[1.4vh] text-[1.5vh] max-lg:text-sm text-zinc-800 rounded-[3vh] bg-neutral-200">
                                                     Digitando...
                                                 </Skeleton>
                                             </div>

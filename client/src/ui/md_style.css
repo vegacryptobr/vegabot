@@ -33,5 +33,7 @@
     @apply my-5 ml-8;
 }
 
-
+h1 {
+    @apply text-[1.3rem] font-bold;
+}
   
