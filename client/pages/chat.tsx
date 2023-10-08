@@ -181,7 +181,7 @@ export default function Chat() {
         try {
             setIsLoading(true)
             setTipsView('flex hidden')
-            const response = await fetch('https://vegachatbot123.rj.r.appspot.com/predict', {
+            const response = await fetch('https://chatvegacrypto.rj.r.appspot.com/predict', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody),
@@ -291,7 +291,7 @@ export default function Chat() {
                     <CardContent className='flex flex-col items-center'>
                         <ScrollArea className="h-[75vh] w-full px-[2vw] max-lg:h-[93vh] max-lg:w-screen max-lg:px-[10vw]" >
                             <div className={tipsView}>
-                                <h1 className='text-neutral-800 text-[3rem] font-extrabold text-center mt-[7%]'>VegaBot</h1>
+                                <h1 className='text-neutral-800 text-[3rem] font-extrabold text-center mt-[7%]'>VEGABOT</h1>
 
                                 <div className='flex flex-wrap justify-center gap-[5vh] mt-[5vh] max-lg:flex-nowrap max-lg:flex-col max-lg:mt-10'>
                                     <CardTips text='O que é o Real Digital?' onClick={() => {

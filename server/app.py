@@ -3,7 +3,7 @@ import pyrebase
 from bot import get_response
 from flask_cors import CORS
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://vegacrypto.xyz"}})
+CORS(app, resources={r"/*": {"origins": "https://chat.vegacrypto.xyz"}})
 
 config = {
     'apiKey': "AIzaSyAZDuSI9RwZlg6SziXPhXjIz30yQAsogMo",
