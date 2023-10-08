@@ -173,9 +173,6 @@ export default function Chat() {
             }
         }
 
-        console.log(messageId)
-        console.log(messages.length)
-
         const requestBody = { input: input, id: userId, lang: selectedLang, messageId: messageId }
 
         try {
@@ -355,7 +352,7 @@ export default function Chat() {
                                     )}
 
                                     {message.sender == 'vegabot' && (
-                                        <div key={index} className='flex gap-[2vh] mt-[5vh] mb-5'>
+                                        <div key={index} className='flex gap-[2vh] mt-[2vh] mb-5'>
                                             <Avatar className='h-[4.2vh] w-[4.2vh] text-[1.5vh] max-lg:text-sm max-lg:hidden'>
                                                 <AvatarFallback className='bg-neutral-400 text-neutral-200 m-auto'>V</AvatarFallback>
                                                 <AvatarImage src='images/logo.png' className='m-auto'></AvatarImage>
