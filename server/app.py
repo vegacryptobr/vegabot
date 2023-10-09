@@ -92,17 +92,18 @@ def authentication():
 
 @app.route('/predict', methods=['POST'])
 def chat(): 
+    client_ip = request.remote_addr
     data = request.json
     user_input = data.get('input')
-    user_id = data.get('id')
     lang = data.get('lang')
-    bot_response = get_response(user_id, user_input, lang)
+
+    bot_response = get_response(client_ip, user_input, lang)
 
     if "error" in bot_response:
         return jsonify({"error": bot_response["error"]})
 
     else:
-        response = {'result': bot_response['result'], 'source': bot_response['source']}
+        response = {'result': bot_response['result'], 'uid': client_ip, 'source': bot_response['source']}
         return jsonify(response)
 
 

@@ -5,12 +5,11 @@ import React from 'react'
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from "../src/ui/avatar"
 import { Button } from "../src/ui/button"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../src/ui/card"
+import { Card, CardContent, CardFooter } from "../src/ui/card"
 import { Input } from "../src/ui/input"
 import { useState, useEffect, useRef } from 'react'
 import { ScrollArea } from "../src/ui/scroll-area"
 import { Skeleton } from "../src/ui/skeleton"
-import { useDropzone } from 'react-dropzone'
 import Login from './login'
 import Register from './register'
 import { useAuth } from '../context/authContext'
@@ -118,7 +117,6 @@ informações pessoais.
 export default function Chat() {
     const [isLoginOpen, setIsLoginOpen] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
-    const [selectedImage, setSelectedImage] = useState<File | null>(null)
     const [input, setInput] = useState('')
     const [selectedLang, setSelectedLang] = useState('pt')
     const [messages, setMessages] = useState<any[]>([])
@@ -162,8 +160,7 @@ export default function Chat() {
             }
         }
 
-        const requestBody = { input: input, id: userId, lang: selectedLang, messageId: messageId }
-        console.log(requestBody.id)
+        const requestBody = { input: input, lang: selectedLang, messageId: messageId }
 
         try {
             setIsLoading(true)
@@ -179,7 +176,7 @@ export default function Chat() {
             }
 
             let data = await response.json()
-            setUserId(data.uid)
+            console.log(data.uid)
 
             if ('error' in data) {
                 messageId++
@@ -408,7 +405,7 @@ export default function Chat() {
                 </Card>
             )}
 
-            {messageId > 3 && (
+            {messageId > 6 && (
                 <>
                     {isLoginOpen ? (
                         <Register onLoginClick={handleLogin} />
