@@ -96,8 +96,7 @@ def chat():
     user_input = data.get('input')
     user_id = data.get('id')
     lang = data.get('lang')
-    messageId = data.get('messageId')
-    bot_response = get_response(user_id, user_input, lang, messageId)
+    bot_response = get_response(user_id, user_input, lang)
 
     if "error" in bot_response:
         return jsonify({"error": bot_response["error"]})
