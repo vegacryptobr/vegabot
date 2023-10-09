@@ -189,7 +189,7 @@ export default function Chat() {
             }
 
             let data = await response.json()
-            setUserId(data.uid)
+            console.log(data.uid)
 
             if ('error' in data) {
                 messageId++

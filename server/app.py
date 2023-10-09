@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "https://chat.vegacrypto.xyz"}})
 
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_PERMANENT'] = False
+app.config['SECRET_KEY'] = 'secretkey'
 Session(app)
 
 config = {
