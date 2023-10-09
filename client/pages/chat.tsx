@@ -128,18 +128,7 @@ export default function Chat() {
     const { successfulLogin, logMessage } = useAuth();
     const [loginMessage, setLoginMessage] = useState('')
     const [showLoginMessage, setShowLoginMessage] = useState(false);
-
-    const onDrop = (acceptedFiles: File[]) => {
-        if (acceptedFiles.length > 0) {
-            const file = acceptedFiles[0]
-            setSelectedImage(file)
-        }
-    }
-
-    const { getRootProps, getInputProps } = useDropzone({
-        onDrop,
-    })
-
+    
     const handleLogin = () => {
         if (!isLoginOpen) {
             setIsLoginOpen(true)
@@ -156,13 +145,13 @@ export default function Chat() {
         }
 
         messageId++
-        const newMessage = { sender: 'you', content: input, messageId: messageId }
+        const newMessage = { sender: 'you', content: input }
         setMessages([...messages, newMessage])
 
         if (messageId === 1) {
             if (tips_responses.hasOwnProperty(input)) {
                 messageId++
-                const timer = setTimeout(() => {
+                setTimeout(() => {
                     let response: string = tips_responses[input];
                     const newResponse = { sender: 'vegabot', content: response }
                     setMessages([...messages, newMessage, newResponse])
@@ -173,8 +162,7 @@ export default function Chat() {
             }
         }
 
-        const requestBody = { input: input, id: userId, lang: selectedLang, messageId: messageId }
-        console.log(requestBody.id)
+        const requestBody = { input: input, id: userId, lang: selectedLang }
 
         try {
             setIsLoading(true)

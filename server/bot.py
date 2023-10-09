@@ -145,7 +145,7 @@ agent = initialize_agent(
 )
 
 user_conversations = {}
-
+                                                                                        
 def get_response(user_id, text, lang):
     if user_id not in user_conversations:
         # Initialize conversation history for new user
@@ -158,7 +158,7 @@ def get_response(user_id, text, lang):
         conversation_history.append(text)
 
         # Generate response using the conversation history
-        output = agent(chat_prompt.format_prompt(input=text).to_string())['output']
+        output = agent(chat_prompt.format_prompt(input="\n".join(conversation_history)).to_string())['output']
 
         # Append agent response to conversation history
         conversation_history.append(output)
