@@ -128,7 +128,7 @@ export default function Chat() {
     const { successfulLogin, logMessage } = useAuth();
     const [loginMessage, setLoginMessage] = useState('')
     const [showLoginMessage, setShowLoginMessage] = useState(false);
-    
+
     const handleLogin = () => {
         if (!isLoginOpen) {
             setIsLoginOpen(true)
@@ -145,13 +145,13 @@ export default function Chat() {
         }
 
         messageId++
-        const newMessage = { sender: 'you', content: input }
+        const newMessage = { sender: 'you', content: input, messageId: messageId }
         setMessages([...messages, newMessage])
 
         if (messageId === 1) {
             if (tips_responses.hasOwnProperty(input)) {
                 messageId++
-                setTimeout(() => {
+                const timer = setTimeout(() => {
                     let response: string = tips_responses[input];
                     const newResponse = { sender: 'vegabot', content: response }
                     setMessages([...messages, newMessage, newResponse])
@@ -162,7 +162,8 @@ export default function Chat() {
             }
         }
 
-        const requestBody = { input: input, id: userId, lang: selectedLang }
+        const requestBody = { input: input, id: userId, lang: selectedLang, messageId: messageId }
+        console.log(requestBody.id)
 
         try {
             setIsLoading(true)
@@ -178,6 +179,7 @@ export default function Chat() {
             }
 
             let data = await response.json()
+            setUserId(data.uid)
 
             if ('error' in data) {
                 messageId++

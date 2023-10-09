@@ -161,7 +161,7 @@ def get_response(user_id, text, lang):
         output = agent(chat_prompt.format_prompt(input="\n".join(conversation_history)).to_string())['output']
 
         # Append agent response to conversation history
-        conversation_history.append(output)
+        conversation_history.append(output) 
 
         response = {'result': translator(output, lang), 'source': sources(text)}
         return response
