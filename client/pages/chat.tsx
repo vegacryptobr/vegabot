@@ -189,6 +189,8 @@ export default function Chat() {
             }
 
             let data = await response.json()
+            setUserId(data.uid)
+
             if ('error' in data) {
                 messageId++
                 let erro = data.error
