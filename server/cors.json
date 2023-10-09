@@ -1,7 +1,7 @@
 [
     {
-      "origin": ["https://your-example-website.appspot.com"],
-      "method": ["GET"],
+      "origin": ["*"],
+      "method": ["GET", "POST"],
       "responseHeader": ["Content-Type"],
       "maxAgeSeconds": 3600
     }

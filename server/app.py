@@ -1,15 +1,10 @@
-from flask import Flask, render_template, session, request, redirect, jsonify, make_response
+from flask import Flask, session, request, jsonify
 import pyrebase
 from bot import get_response
 from flask_cors import CORS
-from flask_session import Session
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://chat.vegacrypto.xyz"}})
-
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SECRET_KEY'] = 'secretkey'
-Session(app)
+CORS(app, origins='*')
 
 config = {
     'apiKey': "AIzaSyAzzqD9bV0yPCHQUsNlN5VKQ8t6zDD5vVo",
@@ -52,7 +47,7 @@ def authentication():
                 user = auth.sign_in_with_email_and_password(email, password)
                 session['user'] = email
                 user['localId']
-                response = jsonify({
+                return jsonify({
                     'success': True,
                     'email': user['email'],
                     'uid': user['localId']

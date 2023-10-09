@@ -174,6 +174,7 @@ export default function Chat() {
         }
 
         const requestBody = { input: input, id: userId, lang: selectedLang, messageId: messageId }
+        console.log(requestBody.id)
 
         try {
             setIsLoading(true)
@@ -189,7 +190,6 @@ export default function Chat() {
             }
 
             let data = await response.json()
-            console.log(data.uid)
 
             if ('error' in data) {
                 messageId++
