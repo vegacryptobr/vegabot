@@ -2,8 +2,16 @@ from flask import Flask, render_template, session, request, redirect, jsonify
 import pyrebase
 from bot import get_response
 from flask_cors import CORS
+from flask import Flask, session
+from flask_session import Session
+
+
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "https://chat.vegacrypto.xyz"}})
+
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = False
+Session(app)
 
 config = {
     'apiKey': "AIzaSyAzzqD9bV0yPCHQUsNlN5VKQ8t6zDD5vVo",
@@ -96,6 +104,8 @@ def chat():
     lang = data.get('lang')
     messageId = data.get('messageId')
     bot_response = get_response(user_id, user_input, lang, messageId)
+    session['chat_messages'] = bot_response
+
     if "error" in bot_response:
         return jsonify({"error": bot_response["error"]})
 
