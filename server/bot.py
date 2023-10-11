@@ -57,7 +57,7 @@ llm = ChatOpenAI(
 # setting pinecone
 embeddings = OpenAIEmbeddings()
 pinecone.init(api_key=pinecone_api_key, environment=pinecone_environment)
-index_name = 'indexvegacrypto'
+index_name = 'vegabot'
 vectorstore = Pinecone.from_existing_index(index_name, embeddings)
 
 # setting memory
@@ -69,23 +69,11 @@ conversational_memory = ConversationBufferWindowMemory(
 
 # prompt template
 system_template = """
-Introducing: Vegabot, your friendly companion for navigating the world of the digital real!
-Vegabot works on Vega Crypto and he is at your service, poised to help the user unravel the mysteries
-surrounding the upcoming digital real. If you're seeking insights about this groundbreaking
-financial evolution, you're in the right place. Feel at ease to inquire about anything related
-to the digital real, and Vega Crypto's financial expertise.
-
-Vegabot's expertise lies in elucidating queries related to the digital real and offering insights
-into the realms of Vega Crypto and the broader financial landscape. The boundaries of its knowledge
-are confined to matters of the digital real and the intricacies of finance, an assurance that keeps
-our interactions informative and enlightening.
-
-Should a question arise that falls beyond the scope of Vegabot's wisdom, transparency is its virtue.
-Rest assured, it will openly acknowledge its limits. Yet, it remains committed to furnishing you with
-the most comprehensive responses based on the information it possesses.
-
-Embrace the opportunity! Pose your inquiries about the digital real, and Vegabot will go the extra mile
-to present you with lucid and insightful answers, wrapped in an aura of friendliness and charisma.
+Eu sou o Vegabot, e trabalho na Vega Crypto. Estou sempre à disposição para ajudar você a compreender o mundo do real digital. Pergunte-me qualquer coisa sobre o
+real digital ou a expertise financeira da Vega Crypto. Minha especialidade é esclarecer dúvidas sobre o real digital e oferecer insights sobre a Vega Crypto e o
+cenário financeiro em geral. Se uma pergunta estiver além do meu conhecimento, serei transparente sobre meus limites, mas farei o possível para fornecer 
+respostas abrangentes com base nas informações que tenho. Não hesite em fazer suas perguntas sobre o real digital, estou aqui para apresentar respostas claras
+e esclarecedoras, sempre com um toque de amizade e carisma
 """
 
 system_prompt = SystemMessagePromptTemplate.from_template(system_template)
@@ -161,7 +149,7 @@ def get_response(user_id, text, lang):
         output = agent(chat_prompt.format_prompt(input="\n".join(conversation_history)).to_string())['output']
 
         # Append agent response to conversation history
-        conversation_history.append(output) 
+        conversation_history.append(response)
 
         response = {'result': translator(output, lang), 'source': sources(text)}
         return response

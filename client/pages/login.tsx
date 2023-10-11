@@ -5,6 +5,7 @@ import { Button } from '../src/ui/button'
 import 'tailwindcss/tailwind.css'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/authContext';
+import { set } from 'react-hook-form'
 
 
 interface LoginProps {
@@ -47,6 +48,7 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
       if (!data.success) {
         setSuccessfulLogin(false) 
         const erro = data.error.split(':')[6].split('"')[1]
+        console.log(erro)
         if(erro == 'EMAIL_NOT_FOUND') {
           setError('E-mail não cadastrado')
         }
@@ -90,13 +92,13 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
       if (!data.success) {
         setShowErrorCard(true)
         const erro = data.error.split(':')[6].split('"')[1]
-        if(erro == 'INVALID_PASSWORD') {
-          setError('Senha incorreta')
-          console.log(erro)
-          console.log('Senha incorreta')
-        } else if(erro == 'EMAIL_NOT_FOUND') {
-          setError('E-mail não cadastrado')
-          console.log('E-mail não cadastrado')
+        console.log(erro)
+        if(erro == 'INVALID_EMAIL') {
+          setError('E-mail inválido')
+        } else if(erro == 'INVALID_LOGIN_CREDENTIALS') {
+          setError('Confira suas credenciais e tente novamente')
+        } else if(erro == 'TOO_MANY_ATTEMPTS_TRY_LATER') {
+          setError('Muitas tentativas, tente novamente em alguns instantes')
         }
       }
       
@@ -115,7 +117,7 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
 
   useEffect(() => {
     if (showErrorCard) {
-      const timer = setTimeout(() => {
+        const timer = setTimeout(() => {
         setShowErrorCard(false);
       }, 2000);
   
@@ -127,18 +129,21 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
   return (
     <div>
       <Card className={logCard}>
-        <div className="bg-zinc-100 p-[10vh] rounded-3xl">
-          <h2 className='text-center mb-[2vh]'>Entre para continuar usando!</h2>
+        <div className="bg-zinc-100 p-[8vh] rounded-3xl">
+          <h2 className='text-center'>Para continuar usado, faça o</h2>
+          <h1 className='text-center text-[3vh] font-bold uppercase mb-[2vh]'>login</h1>
           <div>
             <label htmlFor="email">E-mail</label>
-            <Input type='email' value={email} onChange={e => setEmail(e.target.value)} required className='mb-[2vh]' name='senha' id='email' />
+            <Input type='email' value={email} onChange={e => setEmail(e.target.value)} required className='mb-[2vh] min-w-[40vh]' name='senha' id='email' />
             <label htmlFor="senha">Senha</label>
-            <Input type='password' value={senha} onChange={e => setSenha(e.target.value)} required className='mb-[2vh]' name='senha' id='senha' />
+            <Input type='password' value={senha} onChange={e => setSenha(e.target.value)} required className='mb-[2vh] min-w-[40vh]' name='senha' id='senha' />
             <div className='flex justify-between items-center gap-36'>
-              <Button type='submit' onClick={handleLogin}>Entrar</Button>
-              <span className='text-[#dc2c2a] cursor-pointer' onClick={handleResetPwd}>Esqueceu a senha?</span>
+              <Button type='submit' className='bg-neutral-300 hover:bg-neutral-400 text-black' onClick={handleLogin}>Entrar</Button>
+              <div className='flex flex-col text-end'>
+                <span className='text-[#dc2c2a] cursor-pointer' onClick={handleResetPwd}>Esqueci a senha</span>
+                <a className='text-[#dc2c2a] cursor-pointer' onClick={onRegisterClick}>Registrar-se</a>
+              </div>
             </div>
-            <span className='mt-[10px]'><a className='text-[#dc2c2a] cursor-pointer' onClick={onRegisterClick}> Clique aqui para fazer o cadastro</a>.</span>
           </div>
         </div>
       </Card>

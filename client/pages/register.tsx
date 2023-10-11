@@ -48,6 +48,7 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
         setSuccessfulLogin(false)
         setShowErrorCard(true)
         const erro = data.error.split(':')[6].split('"')[1]
+        console.log(erro)
         if(erro == 'WEAK_PASSWORD ') {
           setError('Senha fraca, tente uma mais forte')
         } else if(erro == 'EMAIL_EXISTS') {
@@ -86,15 +87,16 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
   return (
     <div>
       <Card className={loggedCard}>
-        <div className="bg-zinc-100 p-[10vh] rounded-3xl">
-          <h2 className='text-center mb-[2vh]'>Para continuar usado, crie sua conta. É gratis!</h2>
+        <div className="bg-zinc-100 p-[8vh] rounded-3xl">
+          <h2 className='text-center'>Para continuar usado</h2>
+          <h1 className='text-center text-[3vh] font-bold uppercase mb-[2vh]'>Registre-se</h1>
           <div>
             <label htmlFor="email">E-mail</label>
             <Input type='email' value={email} onChange={e => setEmail(e.target.value)} required className='mb-[2vh] min-w-[40vh]' id='email' name='email' />
             <label htmlFor="senha">Senha</label>
             <Input type='password' value={senha} onChange={e => setSenha(e.target.value)} required className='mb-[2vh] min-w-[40vh]' id='senha' name='senha'/>
             <div className='flex justify-between items-center text-right'>
-              <Button type='submit' onClick={handleRegister}>Registrar</Button>
+              <Button type='submit' className='bg-neutral-300 hover:bg-neutral-400 text-black' onClick={handleRegister}>Registrar</Button>
               <span>Já tem conta?<br /><a className='text-[#dc2c2a] cursor-pointer' onClick={ onLoginClick }> clique aqui para entrar</a>.</span>
             </div>
           </div>

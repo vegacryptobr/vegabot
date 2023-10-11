@@ -405,7 +405,7 @@ export default function Chat() {
                 </Card>
             )}
 
-            {messageId > 6 && (
+            {messageId > 1 && (
                 <>
                     {isLoginOpen ? (
                         <Register onLoginClick={handleLogin} />
