@@ -18,15 +18,10 @@ from langchain.chains import RetrievalQA
 #news tool
 from langchain.utilities import GoogleSerperAPIWrapper
 
-#retriever
-from langchain.chains import RetrievalQA
-
 #memory_and_prompt
 from langchain.memory import ConversationBufferWindowMemory
-from langchain.prompts import PromptTemplate
 from langchain.prompts import (
     ChatPromptTemplate,
-    PromptTemplate,
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate,
 )
@@ -149,9 +144,9 @@ def get_response(user_id, text, lang):
         output = agent(chat_prompt.format_prompt(input="\n".join(conversation_history)).to_string())['output']
 
         # Append agent response to conversation history
-        conversation_history.append(response)
+        conversation_history.append(output)
 
-        response = {'result': translator(output, lang), 'source': sources(text)}
+        response = { 'result': translator(output, lang), 'source': sources(text) }
         return response
     except Exception as e:
         return {"error": str(e)}

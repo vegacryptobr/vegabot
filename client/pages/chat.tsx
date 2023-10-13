@@ -176,7 +176,6 @@ export default function Chat() {
             }
 
             let data = await response.json()
-            console.log(data.uid)
 
             if ('error' in data) {
                 messageId++
@@ -188,7 +187,9 @@ export default function Chat() {
             } else {
                 messageId++
                 let newContent = data.result
+                console.log(newContent)
                 let source = data.source
+                console.log(newContent)
                 const newResponse = { sender: 'vegabot', content: newContent, sources: source}
                 setMessages([...messages, newMessage, newResponse])
             }
@@ -405,7 +406,7 @@ export default function Chat() {
                 </Card>
             )}
 
-            {messageId > 1 && (
+            {messageId > 3 && (
                 <>
                     {isLoginOpen ? (
                         <Register onLoginClick={handleLogin} />
