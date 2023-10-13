@@ -32,20 +32,23 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
     }
 
     try {
-      const response = await fetch('https://chatvegacrypto.rj.r.appspot.com/auth', {
+      const response = await fetch('http://127.0.0.1:8000/auth', {
         method: 'POST',
         headers: { 'Content-Type':'application/json' },
         body: JSON.stringify(requestBody),
       })
 
       const data = await response.json()
+      console.log(data)
       
       if(data.success) {
+        setShowErrorCard(true)
         setSuccessfulLogin(true)
-        setLogMessage(`E-mail de recuperação enviado para ${data.email}\nLogue novamente após a recuperação`)
+        setError(`E-mail de recuperação enviado para ${data.email}.\n\nLogue novamente após a recuperação`)
       }
       
       if (!data.success) {
+        setShowErrorCard(true)
         setSuccessfulLogin(false) 
         const erro = data.error.split(':')[6].split('"')[1]
         console.log(erro)
@@ -74,7 +77,7 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
     }
   
     try {
-      const response = await fetch('https://chatvegacrypto.rj.r.appspot.com/auth', {
+      const response = await fetch('http://127.0.0.1:8000/auth', {
         method: 'POST',
         headers: { 'Content-Type':'application/json' },
         body: JSON.stringify(requestBody),
@@ -119,12 +122,16 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
     if (showErrorCard) {
         const timer = setTimeout(() => {
         setShowErrorCard(false);
-      }, 2000);
-  
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [showErrorCard]);
   
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+        handleLogin()
+    }
+  }
 
   return (
     <div>
@@ -132,7 +139,7 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
         <div className="bg-zinc-100 p-[8vh] rounded-3xl">
           <h2 className='text-center'>Para continuar usado, faça o</h2>
           <h1 className='text-center text-[3vh] font-bold uppercase mb-[2vh]'>login</h1>
-          <div>
+          <div onKeyDown={handleKeyPress}>
             <label htmlFor="email">E-mail</label>
             <Input type='email' value={email} onChange={e => setEmail(e.target.value)} required className='mb-[2vh] min-w-[40vh]' name='senha' id='email' />
             <label htmlFor="senha">Senha</label>
@@ -151,6 +158,7 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
       {showErrorCard && (
         <Card className='absolute top-6 left-[50%] translate-x-[-50%] p-[20px]'>
             <div className='p-[10px] rounded-3xl'>
+
               {error}
             </div>
         </Card>

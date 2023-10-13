@@ -30,7 +30,7 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
     }
   
     try {
-      const response = await fetch('https://chatvegacrypto.rj.r.appspot.com/auth', {
+      const response = await fetch('http://127.0.0.1:8000/auth', {
         method: 'POST',
         headers: { 'Content-Type':'application/json' },
         body: JSON.stringify(requestBody),
@@ -67,6 +67,12 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
     }
   }
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+        handleRegister()
+    }
+  }
+
   useEffect(() => {
     if(!successfulLogin) {
       setError(error)
@@ -90,14 +96,14 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
         <div className="bg-zinc-100 p-[8vh] rounded-3xl">
           <h2 className='text-center'>Para continuar usado</h2>
           <h1 className='text-center text-[3vh] font-bold uppercase mb-[2vh]'>Registre-se</h1>
-          <div>
+          <div onKeyDown={handleKeyPress}>
             <label htmlFor="email">E-mail</label>
             <Input type='email' value={email} onChange={e => setEmail(e.target.value)} required className='mb-[2vh] min-w-[40vh]' id='email' name='email' />
             <label htmlFor="senha">Senha</label>
             <Input type='password' value={senha} onChange={e => setSenha(e.target.value)} required className='mb-[2vh] min-w-[40vh]' id='senha' name='senha'/>
             <div className='flex justify-between items-center text-right'>
               <Button type='submit' className='bg-neutral-300 hover:bg-neutral-400 text-black' onClick={handleRegister}>Registrar</Button>
-              <span>Já tem conta?<br /><a className='text-[#dc2c2a] cursor-pointer' onClick={ onLoginClick }> clique aqui para entrar</a>.</span>
+              <span>Já tem conta?<br /><a className='text-[#dc2c2a] cursor-pointer' onClick={ onLoginClick }> clique aqui </a>para entrar</span>
             </div>
           </div>
           
