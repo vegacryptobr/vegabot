@@ -154,7 +154,6 @@ export default function Chat() {
                     const newResponse = { sender: 'vegabot', content: response }
                     setMessages([...messages, newMessage, newResponse])
                 }, 3000);
-                return
             } else {
 
             }
@@ -170,6 +169,11 @@ export default function Chat() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody),
             })
+
+            if(messageId === 2) {
+                console.log('ixi')
+                return
+            }
 
             if (!response.ok) {
                 throw new Error(`request failed with status ${response.status}`)
