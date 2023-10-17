@@ -104,8 +104,7 @@ def chat():
 
     else:
         response = { 'result': bot_response['result'], 'source': bot_response['source'] }
-        print(response)
         return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

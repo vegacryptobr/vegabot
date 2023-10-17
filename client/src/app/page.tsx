@@ -12,9 +12,9 @@ export default function Home() {
 
         <div className="flex max-lg:hidden">
           <HoverCard>
-            <HoverCardTrigger className="cursor-pointer">Quer aprender mais sobre o Real Digital?</HoverCardTrigger>
+            <HoverCardTrigger className="cursor-pointer">Vem trocar uma ideia sobre o Drex</HoverCardTrigger>
             <HoverCardContent className="text-center">
-              Vem trocar uma ideia sobre o que você está achando do Drex <a href="https://discord.com/invite/D6nMD2CSs6" className="text-[#dc2c2a]">na nossa comunidade do Discord!</a> 
+              <a href="https://discord.com/invite/D6nMD2CSs6" className="text-[#dc2c2a]">Entre na nossa comunidade do Discord!</a> 
             </HoverCardContent>
           </HoverCard>
         </div>
