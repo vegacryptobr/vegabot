@@ -15,9 +15,6 @@ from langchain.agents import initialize_agent
 # retrieval
 from langchain.chains import RetrievalQA
 
-#news tool
-from langchain.utilities import GoogleSerperAPIWrapper
-
 #memory_and_prompt
 from langchain.memory import ConversationBufferWindowMemory
 from langchain.prompts import (
@@ -82,6 +79,22 @@ qa = RetrievalQA.from_chain_type(
       retriever=vectorstore.as_retriever(),
 )
 
+# fix output format
+def format_output(frase):
+    pontuacoes = ['!', '.', '?', ';']
+    frase_corrigida = ""
+
+    for i in range(len(frase)):
+      char = frase[i]
+      frase_corrigida += char
+
+      if char in pontuacoes and i < len(frase) - 1 and frase[i + 1] != ' ':
+          frase_corrigida += ' '
+
+    frase_corrigida = frase_corrigida.replace("- ", "-")
+
+    return frase_corrigida
+
 # retriever sources function
 
 def sources(q):
@@ -90,17 +103,18 @@ def sources(q):
 
 # tradutor de entrada e saída
 
-from langdetect import detect
-from googletrans import Translator, LANGUAGES
+from googletrans import Translator
 
-def translator(text, lang):
-  try:
-    text_language = detect(text)
-    if text_language == lang:
-      return text
-
+def detect_language(text):
     text_translator = Translator()
-    translated_text = text_translator.translate(text, src=text_language, dest=lang)
+    language = text_translator.detect(text)
+    return language.lang
+
+
+def translate(text, lang):
+  try:
+    text_translator = Translator()
+    translated_text = text_translator.translate(text, dest=lang)
     return translated_text.text
   except Exception as e:
     return('Desculpe, não consigo responder sua pergunta')
@@ -111,7 +125,7 @@ tools = [
     Tool(
         name='Knowledge Base',
         func=qa.run,
-        description='Utilize a ferramenta Knowledge Base da Vega Crypto para responder perguntas sobre o real digital (Drex), expertise financeira da Vega Crypto, e coisas relacionadas',
+        description='Utilize the Knowledge Base tool to fetch answers directly from documents. All queries should looking for information using the Document search tool first.',
         return_direct=True
     ),
 ]
@@ -129,7 +143,9 @@ agent = initialize_agent(
 
 user_conversations = {}
                                                                                         
-def get_response(user_id, text, lang):
+def get_response(user_id, text):
+    text_language = detect_language(text)
+    
     if user_id not in user_conversations:
         # Initialize conversation history for new user
         user_conversations[user_id] = []
@@ -141,15 +157,14 @@ def get_response(user_id, text, lang):
         conversation_history.append(text)
 
         # Generate response using the conversation history
-        output = agent(chat_prompt.format_prompt(input="\n".join(conversation_history)).to_string())
+        answer = agent(chat_prompt.format_prompt(input="\n".join(conversation_history)).to_string())['output']
+
+        final_output = translate(answer, text_language)
 
         # Append agent response to conversation history
-        conversation_history.append(output)
+        conversation_history.append(final_output)
 
-        response = { 'result': translator(output, lang), 'source': sources(text) }
+        response = { 'result': format_output(final_output), 'source': sources(text) }
         return response
     except Exception as e:
         return {"error": str(e)}
-    
-    
-    
