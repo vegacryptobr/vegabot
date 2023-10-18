@@ -111,7 +111,7 @@ tools = [
     Tool(
         name='Knowledge Base',
         func=qa.run,
-        description='Utilize the Knowledge Base tool to fetch answers directly from documents. All queries should looking for information using the Document search tool first.',
+        description='Utilize a ferramenta Knowledge Base da Vega Crypto para responder perguntas sobre o real digital (Drex), expertise financeira da Vega Crypto, e coisas relacionadas',
         return_direct=True
     ),
 ]
@@ -141,7 +141,7 @@ def get_response(user_id, text, lang):
         conversation_history.append(text)
 
         # Generate response using the conversation history
-        output = agent(chat_prompt.format_prompt(input="\n".join(conversation_history)).to_string())['output']
+        output = agent(chat_prompt.format_prompt(input="\n".join(conversation_history)).to_string())
 
         # Append agent response to conversation history
         conversation_history.append(output)
