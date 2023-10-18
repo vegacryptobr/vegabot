@@ -158,12 +158,12 @@ export default function Chat() {
             }
         }
 
-        const requestBody = { input: input, lang: selectedLang, messageId: messageId }
+        const requestBody = { input: input, messageId: messageId }
 
         try {
             setIsLoading(true)
             setTipsView('flex hidden')
-            const response = await fetch('https://chatvegacrypto.rj.r.appspot.com/predict', {
+            const response = await fetch('http://127.0.0.1:5000/predict', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody),
@@ -192,7 +192,7 @@ export default function Chat() {
                 console.log(newContent)
                 let source = data.source
                 console.log(newContent)
-                const newResponse = { sender: 'vegabot', content: newContent, sources: source }
+                const newResponse = { sender: 'vegabot', content: newContent, sources: source}
                 setMessages([...messages, newMessage, newResponse])
             }
 
@@ -205,11 +205,7 @@ export default function Chat() {
         }
 
     }
-
-    const handleConfig = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedLang(event.target.value)
-    }
-
+    
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             handleInput()
@@ -259,19 +255,7 @@ export default function Chat() {
                             <a href='https://discord.com/invite/Qw3ycUFKKD' target='_blank' className='opacity-50 hover:opacity-100 cursor-pointer p-5'><SiDiscord fill='#dd2c2a' /></a>
                             <a href='' target='_blank' className='opacity-50 hover:opacity-100 cursor-pointer p-5'><SiX fill='#dd2c2a'/></a>
                         </div>
-                        
-                        <div className='flex gap-2 absolute bottom-[4.5vh]'>
-                            <select value={selectedLang} onChange={handleConfig} className='bg-[#1a1a1a] text-[1.7vh] text-neutral-300 w-[8vw] h-[3.5vh] rounded-[1vh] cursor-pointer pl-[0.3vw]'>
-                                <option value="pt">Português</option>
-                                <option value="es">Español</option>
-                                <option value="en">English</option>
-                                <option value="fr">Français</option>
-                                <option value="ko">한국어</option>
-                                <option value="de">Deutsch</option>
-                                <option value="ru">Русский</option>
-                                <option value="ja">日本語</option>
-                            </select>
-                        </div>
+                    
                     </div>
 
                 </div>
@@ -407,7 +391,7 @@ export default function Chat() {
                 </Card>
             )}
 
-            {messageId > 7 && (
+            {messageId > 3 && (
                 <>
                     {isLoginOpen ? (
                         <Register onLoginClick={handleLogin} />
