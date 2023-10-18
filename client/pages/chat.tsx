@@ -192,7 +192,7 @@ export default function Chat() {
                 console.log(newContent)
                 let source = data.source
                 console.log(newContent)
-                const newResponse = { sender: 'vegabot', content: newContent, sources: source}
+                const newResponse = { sender: 'vegabot', content: newContent, sources: source }
                 setMessages([...messages, newMessage, newResponse])
             }
 
@@ -407,7 +407,7 @@ export default function Chat() {
                 </Card>
             )}
 
-            {messageId > 3 && (
+            {messageId > 7 && (
                 <>
                     {isLoginOpen ? (
                         <Register onLoginClick={handleLogin} />
