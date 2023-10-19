@@ -188,9 +188,7 @@ export default function Chat() {
             } else {
                 messageId++
                 let newContent = data.result
-                console.log(newContent)
                 let source = data.source
-                console.log(newContent)
                 const newResponse = { sender: 'vegabot', content: newContent, sources: source}
                 setMessages([...messages, newMessage, newResponse])
             }
