@@ -96,13 +96,11 @@ def format_output(frase):
     return frase_corrigida
 
 # retriever sources function
-
 def sources(q):
   sources = vectorstore.similarity_search_with_relevance_scores(q)
   return [sources[0][0].metadata['source'], sources[1][0].metadata['source']]
 
 # tradutor de entrada e saída
-
 from googletrans import Translator
 
 def detect_language(text):
@@ -125,7 +123,7 @@ tools = [
     Tool(
         name='Knowledge Base',
         func=qa.run,
-        description='Utilize the Knowledge Base tool to fetch answers directly from documents. All queries should looking for information using the Document search tool first.',
+        description='Utilize a ferramenta Knowledge Base para responder perguntas sobre o real digital, Vega Crypto e coisas relacionadas.',
         return_direct=True
     ),
 ]
@@ -167,4 +165,4 @@ def get_response(user_id, text):
         response = { 'result': format_output(final_output), 'source': sources(text) }
         return response
     except Exception as e:
-        return {"error": str(e)}
+        return { "error": str(e) }

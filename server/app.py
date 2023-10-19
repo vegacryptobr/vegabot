@@ -95,7 +95,7 @@ def authentication():
 def chat(): 
     data = request.json
     user_input = data.get('input')
-    user_id = data.get('id')
+    user_id = data.get('userId')
     bot_response = get_response(user_id, user_input)
 
     if "error" in bot_response:

@@ -117,7 +117,6 @@ export default function Chat() {
     const [isLoginOpen, setIsLoginOpen] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
     const [input, setInput] = useState('')
-    const [selectedLang, setSelectedLang] = useState('pt')
     const [messages, setMessages] = useState<any[]>([])
     const messageEndRef = useRef<HTMLDivElement>(null)
     const [userId, setUserId] = useState(0)
@@ -158,7 +157,7 @@ export default function Chat() {
             }
         }
 
-        const requestBody = { input: input, messageId: messageId }
+        const requestBody = { input: input, userId: userId }
 
         try {
             setIsLoading(true)
