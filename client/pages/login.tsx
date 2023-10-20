@@ -61,6 +61,12 @@ const Login: React.FC<LoginProps> = ({ onRegisterClick }) => {
         if(erro == 'MISSING_EMAIL') {
           setError('E-mail não informado. Por favor, digite um e-mail')
         }
+        if(erro == 'MISSING_PASSWORD') {
+          setError('Senha não informada. Por favor, digite uma senha')
+        }
+        if(erro == 'INVALID_PASSWORD') {
+          setError('Senha inválida')
+        }
       }
       
     }catch (err) {
