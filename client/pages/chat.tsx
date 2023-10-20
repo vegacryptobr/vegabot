@@ -18,7 +18,6 @@ import CardTips  from '../src/ui/cardtips'
 import { SiInstagram, SiDiscord, SiX } from "react-icons/si";
 import { RiSendPlane2Fill } from "react-icons/ri";
 
-
 function getRandomInt(min: number, max: number): number {
     min = Math.ceil(min)
     max = Math.floor(max)
@@ -125,6 +124,20 @@ export default function Chat() {
     const [loginMessage, setLoginMessage] = useState('')
     const [showLoginMessage, setShowLoginMessage] = useState(false);
 
+    useEffect(() => {
+
+    const initializeConnection = async () => {
+            setUserId(getRandomInt(1, 1000000))
+            await fetch('https://chatvegacrypto.rj.r.appspot.com/init', {
+                method: 'GET',
+            });
+            console.log('Connection initialized')
+        };
+    
+        initializeConnection();
+    }, []);
+
+
     const handleLogin = () => {
         if (!isLoginOpen) {
             setIsLoginOpen(true)
@@ -182,12 +195,13 @@ export default function Chat() {
                 messageId++
                 let erro = data.error
                 let newContent = (erro.split('LLM output: ')[1])
-                console.log(newContent)
                 const newResponse = { sender: 'vegabot', content: newContent}
                 setMessages([...messages, newMessage, newResponse])
             } else {
                 messageId++
                 let newContent = data.result
+                console.log(newContent)
+
                 let source = data.source
                 const newResponse = { sender: 'vegabot', content: newContent, sources: source}
                 setMessages([...messages, newMessage, newResponse])
@@ -208,10 +222,6 @@ export default function Chat() {
             handleInput()
         }
     }
-
-    useEffect(() => {
-        setUserId(getRandomInt(1, 1000000))
-    }, [])
 
     useEffect(() => {
         messageEndRef.current?.scrollIntoView()
@@ -250,7 +260,7 @@ export default function Chat() {
                         <div className='flex'>
                             <a href='https://www.instagram.com/vegacrypto/' target='_blank' className='opacity-50 hover:opacity-100 cursor-pointer p-5'><SiInstagram fill='#dd2c2a' /></a>
                             <a href='https://discord.com/invite/Qw3ycUFKKD' target='_blank' className='opacity-50 hover:opacity-100 cursor-pointer p-5'><SiDiscord fill='#dd2c2a' /></a>
-                            <a href='' target='_blank' className='opacity-50 hover:opacity-100 cursor-pointer p-5'><SiX fill='#dd2c2a'/></a>
+                            <a href='https://twitter.com/Vegacrypto_' target='_blank' className='opacity-50 hover:opacity-100 cursor-pointer p-5'><SiX fill='#dd2c2a'/></a>
                         </div>
                     
                     </div>
